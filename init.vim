@@ -6,9 +6,12 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
   autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+" the prefix to use for leader commands
+let g:mapleader="<space>"
 set nocompatible
-let g:mapleader=" "
 
+" Use vim-plug to manage your plugins:
+" https://github.com/junegunn/vim-plug
 call plug#begin('~/.config/nvim/autoload/plugged')
 
 if !has('nvim') && !exists('g:gui_oni') | Plug 'tpope/vim-sensible' | endif
