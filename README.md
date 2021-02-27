@@ -27,7 +27,7 @@ This is my process to setting up a practical config that will work on Neovim.
 
 #### Getting started
 
-- [Install Vim and Neovim](#install)
+- [Install Neovim](#install)
 - [Back up existing config](#backup)
 - [Create ~/.vim](#vimpath)
 - [Create .vimrc](#vimrc)
@@ -58,12 +58,6 @@ This is my process to setting up a practical config that will work on Neovim.
 
 There are many ways to acquire Vim. I suggest using [Neovim], a fork of Vim with extra features--but regular [Vim] would work just fine.
 
-- **Vim on Linux** <br> Most distributions come with `vim` and `neovim` packages. Some distributions have different versions available. When in doubt, pick the `vim-gnome` or `vim-gtk3` or `gvim` package.
-
-  ```bash
-  sudo pacman -S gvim         # Arch Linux
-  ```
-
 - **Neovim on Linux** <br> If your distro ships with python-neovim, add it in too.
 
   ```bash
@@ -78,8 +72,6 @@ There are many ways to acquire Vim. I suggest using [Neovim], a fork of Vim with
 Want to try out this guide, but you already have Vim set up? You can rename them for now, and restore it later on.
 
 ```bash
-mv ~/.vimrc ~/.vimrc~
-mv ~/.vim ~/.vim~
 mv ~/.config/nvim ~/.config/nvim~
 ```
 
@@ -88,12 +80,9 @@ mv ~/.config/nvim ~/.config/nvim~
 The first obvious step is to create your config folder. Vim expects this in `~/.vim`, and Neovim expects it in `~/.config/nvim`. Since our goal is to make a Vim config that'll work everywhere, I suggest keeping it in _~/.vim_ and symlinking it as needed.
 
 ```sh
-mkdir -p ~/.vim
-cd ~/.vim
+mkdir -p ~/.config/nvim
+cd ~/.config/nvim
 
-# Version it using Git
-git init
-git commit -m "Initial commit" --allow-empty
 ```
 
 ## Create your init.vim (aka .vimrc) <a id='vimrc'></a>
@@ -101,33 +90,8 @@ git commit -m "Initial commit" --allow-empty
 Vim looks for your config in `~/.vimrc`, and Neovim looks for it in `~/.config/nvim/init.vim`. Let's create the file as `~/.vim/init.vim`, which we will symlink to the proper locations later.
 
 ```bash
-cd ~/.vim
+cd ~/.config/nvim
 touch init.vim
-```
-
-## Set up symlinks <a id='symlinks'></a>
-
-My preferred method is to create a `Makefile` which will set up symlinks as necessary. In `~/.vim`, create a file called `Makefile` and add this in:
-
-```bash
-# Makefile
-pwd := $(shell pwd -LP)
-
-link:
-	@if [ ! . -ef ~/.vim ]; then ln -nfs "${pwd}" ~/.vim; fi
-	@if [ ! . -ef ~/.config/nvim ]; then ln -nfs "${pwd}" ~/.config/nvim; fi
-	@ln -nfs "${pwd}/init.vim" ~/.vimrc
-```
-
-After creating it, just run `make link`. This should finally make your config available in both `~/.config/nvim/init.vim` and `~/.vimrc`.
-
-```bash
-# Before doing this, make sure you don't have ~/.vimrc (careful!)
-rm ~/.vimrc
-
-# Set up symlinks
-cd ~/.vim
-make link
 ```
 
 ## Install vim-plug <a id='vim-plug'></a>
@@ -139,9 +103,9 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
   https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 ```
 
-Edit your config file by doing `vim ~/.vim/init.vim`. Add the following:
+Edit your config file by doing `nvim ~/.config/init.vim`. Add the following:
 
-```vim
+```nvim
 " auto-install vim-plug
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
@@ -169,8 +133,8 @@ autocmd VimEnter *
 
 Save it, restart Vim, then call _PlugInstall_.
 
-```vim
-" Save the file and exit vim
+```nvim
+" Save the file and exit nvim
 :wq
 
 " Start vim again, then install the plugins
