@@ -14,8 +14,6 @@ This is my process to setting up a practical config that will work on Neovim.
 
 <br>
 
-This is my process to setting up a practical config that will work on [Neovim].
-
 # Initial configuration for NeoVim
 
 ## Features
@@ -26,82 +24,6 @@ This is my process to setting up a practical config that will work on [Neovim].
 - line numbers
 - simple plug-vim plugin manager
 - LaTex live preview using :LLPStartPreview
-
-## github setting
-
-```
-	git config --global pull.rebase false
-	git config --global push.default simple
-  git config --global user.name "github-usaername"
-  git config --global user.email "github-username@domain.com"
-  git config --global color.ui true
-  git config --global core.editor vim
-	git config --global credential.helper cache
-	git config --global credential.helper 'cache --timeout=32000'
-```
-
-1. Set up ssh.
-
-```
-  ssh-keygen -t rsa -C "github-username@domain.com"
-```
-
-2. Copy your public key (the contents of the newly-created id_rsa.pub file) into your clipboard.
-
-```
-λ ~/ cat  ~/.ssh/id_rsa.pub
-
-ssh-rsa xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx= github-username@domain.com
-```
-
-3. Paste your ssh public key into your github account settings.
-
-```
-    Go to your github Account Settings
-    Click “SSH Keys” on the left.
-    Click “Add SSH Key” on the right.
-    Add a label (like “My laptop”) and paste the public key into the big text box.
-
-    In a terminal/shell, type the following to test it:
-
-    $ ssh -T git@github.com
-
-    The authenticity of host 'github.com (140.82.113.4)' can't be established.
-    RSA key fingerprint is SHA256:nThbg6kXUpJWGl7E1IGOCspRomTxdCARLviKw6E5SY8.
-    Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-    Warning: Permanently added 'github.com,140.82.113.4' (RSA) to the list of known hosts.
-    Enter passphrase for key '/home/user/.ssh/id_rsa':
-    Hi OrlandoGMedina! You've successfully authenticated, but GitHub does not provide shell access.
-
-    If it says something like the following, it worked:
-
-    Hi username! You've successfully authenticated, but Github does
-    not provide shell access.
-
-```
-
-## Setting up a new Git Repo
-
-###Create a new repository on the command line
-
-```
-    touch README.md
-    git init
-    git add README.md
-or
-    git add --all .
-    git commit -m "first commit"
-    git remote add origin git@github.com:<username>/<reponame>.git
-    git push -u origin master
-```
-
-##Push an existing repository from the command line
-
-```
-    git remote add origin git@github.com:<username>/<reponame>.git
-    git push -u origin master
-
-```
 
 #### Getting started
 
@@ -145,8 +67,8 @@ There are many ways to acquire Vim. I suggest using [Neovim], a fork of Vim with
 - **Neovim on Linux** <br> If your distro ships with python-neovim, add it in too.
 
   ```bash
-  yay -S neovim-git python-neovim
-  sudo pacman -S texlive-most
+  yay -S neovim-git python-neovim           # Arch Linux
+  sudo pacman -S texlive-most               # Arch Linux
   ```
 
 ## Back up your existing Vim config <a id='backup'></a>
