@@ -20,10 +20,16 @@ set nocompatible
 " https://github.com/junegunn/vim-plug
 call plug#begin('~/.config/nvim/autoload/plugged')
 
+" Collection of color schemes
+Plug 'rafi/awesome-vim-colorschemes'
+
 if !has('nvim') && !exists('g:gui_oni') | Plug 'tpope/vim-sensible' | endif
 Plug 'rstacruz/vim-opinion'
 
 call plug#end()
+
+" Use the colorscheme
+colorscheme molokai
 
 " Automatically install missing plugins on startup
 autocmd VimEnter *
